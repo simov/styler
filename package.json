@@ -1,0 +1,24 @@
+{
+    "name": "chrome-styler",
+    "version": "0.1.0",
+    "description": "Chrome styling extension.",
+    "keywords": [
+        "chrome",
+        "styling",
+        "extension"
+    ],
+    "license": "MIT",
+    "homepage": "http://simov.github.com/styler/",
+    "author": {
+        "name": "simo",
+        "email": "simeonvelichkov@gmail.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/simov/styler.git"
+    },
+    "dependencies": {
+        "ws": "*"
+    },
+    "main": "./server/server"
+}
