@@ -1,0 +1,5 @@
+{
+    "host": "localhost",
+    "port": 3000,
+    "path": "/absolute/path/to/styler/sites"
+}

@@ -1,0 +1,48 @@
+{
+    "manifest_version": 2,
+    "name"            : "Styler",
+    "version"         : "1.0",
+    "description"     : "Whatever",
+
+    "options_page"    : "options.html",
+
+    "content_scripts": [
+        {
+            "matches": [
+                "https://*.github.com/*"
+            ],
+            "css": [
+                "sites/github/github-general-fixes.css",
+                "sites/github/monokai-theme-github-code-view.css"
+            ],
+            "js": ["js/events.js"],
+            "run_at": "document_end",
+            "all_frames": true
+        }
+    ],
+
+    "web_accessible_resources": [
+        "sites/github/github-general-fixes.css",
+        "sites/github/monokai-theme-github-code-view.css"
+    ],
+
+    "page_action": {
+        "default_icon"  : "css/images/icon16.png",
+        "default_title" : "Click to start editing using Styler"
+    },
+
+    "icons": {
+        "16"  : "css/images/icon16.png",
+        "48"  : "css/images/icon48.png",
+        "128" : "css/images/icon128.png"
+    },
+
+    "permissions": [
+        "tabs",
+        "bookmarks",
+        "contextMenus",
+        "notifications",
+        "storage",
+        "https://*.github.com/*"
+    ]
+}

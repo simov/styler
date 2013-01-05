@@ -1,0 +1,125 @@
+
+/* COMMON */
+
+/*background*/
+.type-html,
+.type-css,
+.type-javascript,
+.type-html .highlight, 
+.type-css .highlight, 
+.type-javascript .highlight,
+[id$=html] .line_data,
+[id$=css] .line_data,
+[id$=js] .line_data { background: #000; color: #f8f8f2; }
+
+/*comment block*/
+.type-html .cm, [id$=html] .cm,
+.type-javascript .cm, [id$=js] .cm,
+/*comment line*/
+.type-html .c1, [id$=html] .c1,
+.type-javascript .c1, [id$=js] .c1,
+/*comment*/
+.type-html .c, [id$=html] .c,
+.type-css .c, [id$=css] .c { color: #75715e; font-style: normal; }
+
+
+/*string - single quote*/
+.type-html .s1, [id$=html] .s1,
+.type-javascript .s1, [id$=js] .s1,
+/*string - double quotes*/
+.type-html .s2, [id$=html] .s2,
+.type-javascript .s2, [id$=js] .s2,
+/*string regex*/
+.type-html .sr, [id$=html] .sr,
+.type-javascript .sr, [id$=js] .sr,
+/*string*/
+.type-html .s, [id$=html] .s,
+.type-css .s, [id$=css] .s { color: #e6db74; }
+
+/*number*/
+.type-html .mi, [id$=html] .mi,
+.type-javascript .mi, [id$=js] .mi,
+/*number*/
+.type-html .m, [id$=html] .m,
+.type-css .m, [id$=css] .m { color: #ae81ff; }
+
+/*plain text*/
+.type-html .nx, [id$=html] .nx,
+.type-javascript .nx, [id$=js] .nx,
+.type-css .n, [id$=css] .n { color: #f8f8f2; }
+
+/* JS */
+
+/*keyword*/
+.type-html .k, [id$=html] .k,
+.type-javascript .k, [id$=js] .k { color: #f92672; font-weight: normal; }
+
+/*keyword*/
+.type-html .kd, [id$=html] .kd,
+.type-javascript .kd, [id$=js] .kd { color: #66d9ef; font-weight: normal; font-style: italic; }
+
+/*keyword constant*/
+.type-html .kc, [id$=html] .kc,
+.type-javascript .kc, [id$=js] .kc { color: #ae81ff; font-weight: normal; }
+
+/*operator*/
+.type-html .o, [id$=html] .o,
+.type-javascript .o, [id$=js] .o { color: #f92672; font-weight: normal; }
+
+/*punctuation*/
+.type-html .p, [id$=html] .p,
+.type-javascript .p, [id$=js] .p { color: #f8f8f2; }
+
+/*language objects*/
+.type-html .nb, [id$=html] .nb,
+.type-javascript .nb, [id$=js] .nb { color: #66d9ef; font-style: italic; }
+
+
+/* CSS */
+
+/*selector - tag*/
+.type-html .nt, [id$=html] .nt { color: #f92672; }
+.type-css .nt, [id$=css] .nt { color: #e6db74; }
+
+/*selector - id*/
+.type-html .nf, [id$=html] .nf,
+.type-css .nf, [id$=css] .nf { color: #a6e22e; font-weight: normal; }
+
+/*selector - class*/
+.type-html .nc, [id$=html] .nc,
+.type-css .nc, [id$=css] .nc { color: #a6e22e; font-weight: normal; }
+
+/*property name & keyword*/
+.type-html .k, [id$=html] .k,
+.type-css .k, [id$=css] .k { color: #66d9ef; font-weight: normal; font-style: italic; }
+
+/*constant value*/
+.type-html .nb, [id$=html] .nb,
+.type-css .nb, [id$=css] .nb { color: #66d9ef; }
+
+/*operator*/
+.type-html .o, [id$=html] .o,
+.type-css .o, [id$=css] .o { color: #f8f8f2; font-weight: normal; }
+
+/*punctuation*/
+.type-html .p, [id$=html] .p,
+.type-css .p, [id$=css] .p { color: #f8f8f2; }
+
+/*function*/
+.type-html .sx, [id$=html] .sx,
+.type-css .sx, [id$=css] .sx { color: #fd971f; }
+
+/*error*/
+.type-css .err, [id$=css] .err { background: #000; color: #f8f8f2; }
+
+
+/* HTML */
+
+/*doctype*/
+.type-html .cp, [id$=html] .cp { color: #f8f8f2; font-weight: normal; }
+
+/*tag*/
+.type-html .nt, [id$=html] .nt { color: #f92672; }
+
+/*attribute*/
+.type-html .na, [id$=html] .na { color: #a6e22e; }
