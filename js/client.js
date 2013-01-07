@@ -1,7 +1,7 @@
 
 var site = {
     'github': {
-        css: ['github-general-fixes', 'monokai-theme-github-code-view']
+        css: ['monokai-theme-github-code-view-and-gist']
     }
 }
 

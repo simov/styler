@@ -12,18 +12,16 @@
                 "https://*.github.com/*"
             ],
             "css": [
-                "sites/github/github-general-fixes.css",
-                "sites/github/monokai-theme-github-code-view.css"
+                "sites/github/monokai-theme-github-code-view-and-gist.css"
             ],
-            "js": ["js/events.js"],
+            "js": ["js/client.js"],
             "run_at": "document_end",
             "all_frames": true
         }
     ],
 
     "web_accessible_resources": [
-        "sites/github/github-general-fixes.css",
-        "sites/github/monokai-theme-github-code-view.css"
+        "sites/github/monokai-theme-github-code-view-and-gist.css"
     ],
 
     "page_action": {
