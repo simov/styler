@@ -7,7 +7,8 @@ var site = {
 
 function init () {
     var host = window.location.hostname,
-        name = host.match(/^(?:\w+\.)?(\w+)\.\w{2,3}$/i)[1];
+        parts = host.split('.'),
+        name = parts.length < 2 ? parts[0] : parts[parts.length-2];
     if (!site[name]) return;
     loadfiles(name, site[name].css, 'css');
     loadfiles(name, site[name].js, 'js');

@@ -19,7 +19,7 @@ For more information checkout [Google Chrome Extensions](http://developer.chrome
 
 ##Auto reloading on file changed
 
-You must add your site in `js/client`
+You must add your site in `client/js/client.js`
 
     'github': {
         css: ['monokai-theme-github-code-view-and-gist'],

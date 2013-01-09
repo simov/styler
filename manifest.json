@@ -4,17 +4,17 @@
     "version"         : "1.0",
     "description"     : "Whatever",
 
-    "options_page"    : "options.html",
+    "options_page"    : "client/options.html",
 
     "content_scripts": [
         {
             "matches": [
-                "https://*.github.com/*"
+                "*://*.github.com/*"
             ],
             "css": [
                 "sites/github/monokai-theme-github-code-view-and-gist.css"
             ],
-            "js": ["js/client.js"],
+            "js": ["client/js/client.js"],
             "run_at": "document_end",
             "all_frames": true
         }
@@ -25,14 +25,14 @@
     ],
 
     "page_action": {
-        "default_icon"  : "css/images/icon16.png",
+        "default_icon"  : "client/css/images/icon16.png",
         "default_title" : "Click to start editing using Styler"
     },
 
     "icons": {
-        "16"  : "css/images/icon16.png",
-        "48"  : "css/images/icon48.png",
-        "128" : "css/images/icon128.png"
+        "16"  : "client/css/images/icon16.png",
+        "48"  : "client/css/images/icon48.png",
+        "128" : "client/css/images/icon128.png"
     },
 
     "permissions": [
@@ -41,6 +41,6 @@
         "contextMenus",
         "notifications",
         "storage",
-        "https://*.github.com/*"
+        "*://*.github.com/*"
     ]
 }
