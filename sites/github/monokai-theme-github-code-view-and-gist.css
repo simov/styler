@@ -37,9 +37,12 @@
 .type-html .s, [id$=html] .s,
 .type-css .s, [id$=css] .s { color: #e6db74; }
 
-/*number*/
+/*number - integer*/
 .type-html .mi, [id$=html] .mi,
 .type-javascript .mi, [id$=js] .mi,
+/*number - float*/
+.type-html .mf, [id$=html] .mf,
+.type-javascript .mf, [id$=js] .mf,
 /*number*/
 .type-html .m, [id$=html] .m,
 .type-css .m, [id$=css] .m { color: #ae81ff; }
