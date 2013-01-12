@@ -22,12 +22,13 @@
 .type-html .c, [id$=html] .c,
 .type-css .c, [id$=css] .c { color: #75715e; font-style: normal; }
 
-
 /*string - single quote*/
 .type-html .s1, [id$=html] .s1,
+.type-css .s1, [id$=css] .s1,
 .type-javascript .s1, [id$=js] .s1,
 /*string - double quotes*/
 .type-html .s2, [id$=html] .s2,
+.type-css .s2, [id$=css] .s2,
 .type-javascript .s2, [id$=js] .s2,
 /*string regex*/
 .type-html .sr, [id$=html] .sr,
@@ -78,8 +79,8 @@
 /* CSS */
 
 /*selector - tag*/
-.type-html .nt, [id$=html] .nt { color: #f92672; }
-.type-css .nt, [id$=css] .nt { color: #e6db74; }
+.type-html .nt, [id$=html] .nt,
+.type-css .nt, [id$=css] .nt { color: #f92672; }
 
 /*selector - id*/
 .type-html .nf, [id$=html] .nf,
@@ -88,6 +89,10 @@
 /*selector - class*/
 .type-html .nc, [id$=html] .nc,
 .type-css .nc, [id$=css] .nc { color: #a6e22e; font-weight: normal; }
+
+/*selector - pseudo*/
+.type-html .nd, [id$=html] .nd,
+.type-css .nd, [id$=css] .nd { color: #a6e22e; }
 
 /*property name & keyword*/
 .type-html .k, [id$=html] .k,
@@ -104,6 +109,9 @@
 /*punctuation*/
 .type-html .p, [id$=html] .p,
 .type-css .p, [id$=css] .p { color: #f8f8f2; }
+
+/*important*/
+.type-css .cp, [id$=css] .cp { color: #f92672; font-weight: normal; }
 
 /*function*/
 .type-html .sx, [id$=html] .sx,
