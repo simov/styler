@@ -18,7 +18,13 @@
         "url": "git://github.com/simov/styler.git"
     },
     "dependencies": {
-        "ws": "*"
+        "ws": "*",
+        "recursive-fs": "*",
+        "colors": "*"
+    },
+    "devDependencies": {
+        "mocha": "*",
+        "should": "*"
     },
     "main": "./server/server"
 }

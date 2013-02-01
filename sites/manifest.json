@@ -1,0 +1,32 @@
+{
+    "manifest_version": 2,
+    "name"            : "Styler Sites",
+    "version"         : "1.0",
+    "description"     : "Whatever",
+
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.github.com/*"
+            ],
+            "css": [
+                "github/monokai-theme-github-code-view-and-gist.css"
+            ],
+            "run_at": "document_end",
+            "all_frames": true
+        },
+        {
+            "matches": [
+                "*://localhost/*"
+            ],
+            "css": [
+                "localhost/localhost.css"
+            ],
+            "js": [
+                "localhost/localhost.js"
+            ],
+            "run_at": "document_end",
+            "all_frames": true
+        }
+    ]
+}

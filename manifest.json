@@ -4,43 +4,47 @@
     "version"         : "1.0",
     "description"     : "Whatever",
 
-    "options_page"    : "client/options.html",
+    "options_page"    : "views/options.html",
+    "background" : {
+        "scripts": [
+            "lib/require.js",
+            "lib/background/module/file.js",
+            "lib/background/module/manifest.js",
+            "lib/background/module/create.js",
+            "lib/background/index.js"
+        ]
+    },
 
     "content_scripts": [
         {
             "matches": [
-                "*://*.github.com/*"
+                "*://*.github.com/*",
+                "*://localhost/*",
+                "*://code/*",
+                "*://dir/*"
             ],
-            "css": [
-                "sites/github/monokai-theme-github-code-view-and-gist.css"
+            "js": [
+                "lib/require.js",
+                "lib/client/module/server.js",
+                "lib/client/index.js"
             ],
-            "js": ["client/js/client.js"],
             "run_at": "document_end",
             "all_frames": true
         }
     ],
 
-    "web_accessible_resources": [
-        "sites/github/monokai-theme-github-code-view-and-gist.css"
-    ],
-
-    "page_action": {
-        "default_icon"  : "client/css/images/icon16.png",
-        "default_title" : "Click to start editing using Styler"
-    },
-
     "icons": {
-        "16"  : "client/css/images/icon16.png",
-        "48"  : "client/css/images/icon48.png",
-        "128" : "client/css/images/icon128.png"
+        "16"  : "public/images/icon16.png",
+        "48"  : "public/images/icon48.png",
+        "128" : "public/images/icon128.png"
     },
 
     "permissions": [
         "tabs",
-        "bookmarks",
-        "contextMenus",
-        "notifications",
-        "storage",
-        "*://*.github.com/*"
+        "management",
+        "*://*.github.com/*",
+        "*://localhost/*",
+        "*://code/*",
+        "*://dir/*"
     ]
 }
