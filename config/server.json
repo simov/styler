@@ -1,28 +1,4 @@
 {
-    "server": {
-        "host": "localhost",
-        "port": 3009
-    },
-    "watch": [
-        {
-            "host": "localhost",
-            "path": "/home/mighty/code/other/chrome/styler/sites/localhost",
-            "enabled": true
-        },
-        {
-            "host": "dir",
-            "path": "/home/mighty/github/connect/lib/public",
-            "enabled": true
-        },
-        {
-            "host": "github.com",
-            "path": "/home/mighty/code/other/chrome/styler/sites/github",
-            "enabled": true
-        },
-        {
-            "host": "code",
-            "path": "/home/mighty/code/css/bootstrap/slide-portfolio",
-            "enabled": true
-        }
-    ]
+    "host": "localhost",
+    "port": 3009
 }

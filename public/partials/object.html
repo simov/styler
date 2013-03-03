@@ -1,0 +1,37 @@
+<li class="{{type}}">
+    {{#hasChildren}}
+    <div class="keys-wrapper">
+        <span class="key" contenteditable="true">{{key}}</span>
+        <ul class="keys">
+            {{#keys}}
+            <li class="add">{{.}}</li>
+            {{/keys}}
+        </ul>
+    </div>
+    {{/hasChildren}}
+
+    {{^hasChildren}}
+    <span class="key">{{key}}</span>
+    {{/hasChildren}}
+
+
+    {{^hasValue}}
+    <ul>
+        {{#enabled}}
+        <li class="bool">		
+            <span class="key">enabled</span>
+            <span class="value">true</span>
+        </li>
+        {{/enabled}}
+    </ul>
+    {{/hasValue}}
+
+    {{#hasValue}}
+    <span class="value">{{value}}</span>
+    {{/hasValue}}
+
+
+    {{#hasRemove}}
+    <a href="#" class="btn-remove">&nbsp;</a>
+    {{/hasRemove}}
+</li>

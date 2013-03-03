@@ -1,0 +1,30 @@
+
+/*Monokai 
+  #f8f8f2 - white
+  #75715e - gray
+  #66d9ef - blue
+  #ae81ff - purple
+  #f92672 - red
+  #a6e22e - green
+  #fd971f - orange
+  #e6db74 - yellow
+*/
+
+/*layout*/
+.sr-json { list-style: none; font-family: Monospace, Helvetica, Verdana, Arial, sans-serif; font-size: 14px; line-height: 17px; color: #f8f8f2; background: #000; padding: 0; margin: 0; }
+.sr-json * { outline: 0; padding: 0; margin: 0; }
+.sr-json ul { list-style: none; padding-left: 20px; }
+
+/*key*/
+.sr-json .key { color: #f8f8f2; }
+.sr-json .key:hover,
+.sr-json .key:focus { color: #f92672; cursor: pointer; }
+
+/*value*/
+.sr-json .value:hover,
+.sr-json .value:focus { box-shadow: 0px 0px 3px #f8f8f2; }
+
+.sr-json .str .value { color: #e6db74; }
+.sr-json .num .value { color: #ae81ff; }
+.sr-json .nul .value { color: #ae81ff; }
+.sr-json .bool .value { color: #ae81ff; }

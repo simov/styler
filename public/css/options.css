@@ -1,0 +1,69 @@
+* { outline: 0; padding: 0; margin: 0; }
+
+body { font-family: Monospace, Helvetica, Arial, Sans-Serif; font-size: 14px; line-height: 17px; color: #000; background: #333; }
+
+
+#content { width: 700px; margin: 20px auto 0; }
+
+
+/*disable selection*/
+.sr-json { background: none; }
+.sr-json,
+.sr-json > ul > li > ul > .bool .value {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/*enable selection for contenteditables*/
+.sr-json > ul > li > div .key,
+.sr-json .value {
+    -webkit-touch-callout: auto;
+    -webkit-user-select: auto;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.sr-json > ul { padding: 0; }
+
+/*host box*/
+.sr-json > ul > li { background: #000; color: #f8f8f2; border-radius: 10px; box-shadow: 0px 0px 6px #555; position: relative; z-index: 1; padding: 10px; margin: 0 0 20px 0; }
+/*host key*/
+.sr-json > ul > li > div .key { font-size: 16px; line-height: 20px; color: #f8f8f2; margin: 0 0 5px 0; }
+.sr-json > ul > li > div .key:hover,
+.sr-json > ul > li > div .key:focus { color: #f8f8f2; cursor: auto; box-shadow: 0px 0px 3px #f8f8f2; }
+/*bool keys*/
+.sr-json .bool .value:hover,
+.sr-json .bool .value:focus { box-shadow: none; cursor: default; }
+/*other keys*/
+.sr-json .key { color: #444; }
+
+/*menu*/
+.sr-json p { font-size: 14px; line-height: 17px; }
+.sr-json .keys { display: inline-block; font-size: 10px; line-height: 14px; position: relative; top: -1px; padding: 0 0 0 10px; visibility: hidden; }
+.sr-json .keys li { display: inline-block; color: #f8f8f2; text-decoration: none; background: #75715e; cursor: pointer; border-radius: 4px; padding: 0 3px; }
+.sr-json .keys li:last-child {  }
+.sr-json .keys .add { color: #a6e22e; }
+.sr-json .keys .remove { color: #f92672; }
+
+/*remove host*/
+.sr-json .btn-remove { background: url(../images/remove.png) no-repeat 0 0; width: 12px; height: 12px; position: absolute; top: 10px; right: 10px; z-index: 100; text-decoration: none; visibility: hidden; }
+
+/*content*/
+#content { position: relative; z-index: 1; }
+
+/*main-menu*/
+#main-menu { font-family: Monospace, Helvetica, Arial, Sans-Serif; font-size: 14px; line-height: 17px; display: inline-block; position: fixed; top: 10px; left: 46%; z-index: 100; background: #75715e; border-radius: 5px; box-shadow: 1px 1px 6px #f8f8f2, -1px -1px 6px #f8f8f2; cursor: default; }
+#main-menu ul { list-style: none; padding: 5px; }
+#main-menu li { display: inline; }
+#main-menu li:first-child a { color: #66d9ef; }
+#main-menu li:nth-child(2) a { color: #a6e22e; }
+#main-menu li:last-child a { color: #f92672; }
+#main-menu a { text-decoration: none; }
+#main-menu a:hover { color: #f8f8f2 !important; }
+
+/*beauty tip*/
+.bt-content { font-size: 10px; line-height: 14px; }

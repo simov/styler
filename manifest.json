@@ -4,31 +4,27 @@
     "version"         : "1.0",
     "description"     : "Whatever",
 
-    "options_page"    : "views/options.html",
+    "options_page"    : "public/options.html",
     "background" : {
         "scripts": [
             "lib/require.js",
+            "lib/emitter.js",
             "lib/background/module/file.js",
-            "lib/background/module/manifest.js",
-            "lib/background/module/create.js",
+            "lib/background/module/client.js",
+            "lib/background/module/settings.js",
             "lib/background/index.js"
         ]
     },
 
     "content_scripts": [
         {
-            "matches": [
-                "*://*.github.com/*",
-                "*://localhost/*",
-                "*://code/*",
-                "*://dir/*"
-            ],
+            "matches": ["<all_urls>"],
             "js": [
                 "lib/require.js",
-                "lib/client/module/server.js",
+                "lib/client/module/inject.js",
                 "lib/client/index.js"
             ],
-            "run_at": "document_end",
+            "run_at": "document_start",
             "all_frames": true
         }
     ],
@@ -41,10 +37,8 @@
 
     "permissions": [
         "tabs",
-        "management",
-        "*://*.github.com/*",
-        "*://localhost/*",
-        "*://code/*",
-        "*://dir/*"
-    ]
+        "storage"
+    ],
+
+    "content_security_policy": "script-src 'unsafe-eval'; object-src 'self'"
 }

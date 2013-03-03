@@ -1,0 +1,17 @@
+<ul>
+    {{#value}}
+    <li class="{{type}}">
+        {{!object type}}
+        {{#obj}}
+        <span class="key">{{key}}</span>
+        {{>value}}
+        {{/obj}}
+        
+        {{!value type}}
+        {{^obj}}
+        <span class="key">{{key}}</span>
+        <span class="value">{{value}}</span>
+        {{/obj}}
+    </li>
+    {{/value}}
+</ul>
