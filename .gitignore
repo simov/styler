@@ -14,3 +14,6 @@ results
 
 node_modules
 npm-debug.log
+
+sites/*
+!sites/github
