@@ -1,12 +1,18 @@
 
 var json = require('sr-json'),
-    file = require('file'),
     template = require('template');
 
 
 $(function () {
     // the ui plugin instance
-    var ui = null;
+    var sites = {
+        id: '#site-settings'
+    };
+    var extensions = {
+        id: '#extension-settings'
+    };
+    var active = sites;
+    
     // partials
     var templates = {
         value: 'module/json/partials/sr-json-value.html',
@@ -19,18 +25,38 @@ $(function () {
         read();
     });
     
-    // main menu links
-    $('#main-menu a').on('click', function (e) {
+    // toggle tabs
+    $('#tabs a').on('click', function (e) {
+        $('#tabs li').removeClass('active');
+        var link = $(this);
+        switch (true) {
+            case link.hasClass('btn-sites'):
+                active = sites;
+                break;
+            case link.hasClass('btn-extensions'):
+                active = extensions;
+                break;
+        }
+        $(sites.id).hide();
+        $(extensions.id).hide();
+        $(active.id).show();
+        link.parent().addClass('active');
+        return false;
+    });
+
+    // actions
+    $('#actions a').on('click', function (e) {
         var link = $(this);
         switch (true) {
             case link.hasClass('btn-new'):
-                ui.addHost();
+                active.ui.addHost();
                 break;
             case link.hasClass('btn-save'):
-                var data = {};
-                json.serialize(data, $('.sr-json > ul')[0].children);
-                console.log('serialized', data);
-                write(data);
+                var sitesData = {};
+                json.serialize(sitesData, $(sites.id+' > ul')[0].children);
+                var extensionsData = {};
+                json.serialize(extensionsData, $(extensions.id+' > ul')[0].children);
+                write(sitesData, extensionsData);
                 break;
             case link.hasClass('btn-undo'):
                 read();
@@ -42,22 +68,31 @@ $(function () {
     // read from chrome.storage
     function read () {
         chrome.storage.sync.get(function (data) {
-            show(data);
+            if (!data) data = {styler: {sites: {}, extensions: {}}};
+            render(sites, data.styler.sites || {});
+            render(extensions, data.styler.extensions || {});
         });
     }
+
     // write to chrome.storage
-    function write (data) {
+    function write (sitesData, extensionsData) {
         chrome.storage.sync.clear(function () {
+            var data = {
+                styler: {
+                    sites: sitesData,
+                    extensions: extensionsData
+                }
+            };
             chrome.storage.sync.set(data, function () {
-                show(data);
+                read();
             });
         });
     }
-    // show the info
-    function show (data) {
-        json.parse(data, function (params) {
-            console.log('parsed', params);
-            ui = $('.sr-json').srJSON({
+    
+    // render the settings
+    function render (obj, settings) {
+        json.parse(settings, function (params) {
+            obj.ui = $(obj.id).srJSON({
                 content: template.value.render(
                     {value: params}, {value: template.value.html}),
                 template: template

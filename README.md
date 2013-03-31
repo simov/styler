@@ -1,31 +1,37 @@
 #Styler
 
-Styler is a chrome extension that enables you to inject custom `.css` and `.js` files into the pages you visit. It can auto refresh your pages on file changed as well.
+Styler is a chrome extension that enables you to:
+
+##Features
+- Inject custom `.css` and `.js` files into the pages you visit.
+- Auto reload web pages on file changed.
+- Auto reload chrome extensions on file changed.
 
 ##Installation
-Fire up chrome and navigate to `about:extensions`
+Fire up chrome and navigate to `chrome://extensions`
 Click on `Load unpacked extension ...` and select the folder of this repository.
 
-##Inject files
-Create directory for your host inside `sites/` and put your files there.
-By default you get the [Monokai Theme for GitHub code view and Gist](https://gist.github.com/3716262).
+##Settings
+- Navigate to `chrome://extensions`
+- Find the Styler extension and click on the `Options` link.
 
-##Configure your hosts
-Open the extension's options page and configure your hosts.
-![](http://i.imgur.com/WTw72wq.png)
+##Inject files
+- Create directory for your site inside `sites/` and put your files there.
+
+By default you get the [Monokai Theme for GitHub code view and Gist](https://gist.github.com/3716262).
 
 ##Auto reload on file changed
 
-Check your server configuration in `config/server.json`
+- Check the server's configuration file in `config/server.json`
 
     {
         "host": "localhost",
         "port": 3000
     }
     
-Run the server.
+- Run the server.
 
     $ node lib/server/index.js
     
-Reload the extension.
-Refresh your pages.
+- Reload the extension.
+- Reload the pages.

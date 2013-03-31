@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name"            : "Styler",
-    "version"         : "1.0",
+    "version"         : "1.1",
     "description"     : "Whatever",
 
     "options_page"    : "public/options.html",
@@ -37,7 +37,8 @@
 
     "permissions": [
         "tabs",
-        "storage"
+        "storage",
+        "management"
     ],
 
     "content_security_policy": "script-src 'unsafe-eval'; object-src 'self'"

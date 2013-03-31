@@ -27,15 +27,28 @@
     <script src="js/options.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
+<header id="header">
+    <div class="shell">
+        <nav id="tabs" class="tabs">
+            <ul>
+                <li class="active"><a href="#" class="btn-sites">sites</a></li>
+                <li><a href="#" class="btn-extensions">extensions</a></li>
+            </ul>
+        </nav>
+        <nav id="actions" class="tabs">
+            <ul>
+                <li><a href="#" class="btn-new">new</a></li>
+                <li><a href="#" class="btn-save">save</a></li>
+                <li><a href="#" class="btn-undo">undo</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
 <section id="content">
-    <nav id="main-menu">
-        <ul>
-            <li><a href="#" class="btn-new">new</a></li>
-            <li><a href="#" class="btn-save">save</a></li>
-            <li><a href="#" class="btn-undo">undo</a></li>
-        </ul>
-    </nav>
-    <div class="sr-json">
+    <div id="site-settings" class="sr-json">
+        
+    </div>
+    <div id="extension-settings" class="sr-json">
         
     </div>
 </section>

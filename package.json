@@ -1,11 +1,12 @@
 {
     "name": "chrome-styler",
-    "version": "0.1.0",
+    "version": "1.1",
     "description": "Chrome styling extension.",
     "keywords": [
         "chrome",
         "styling",
-        "extension"
+        "extension",
+        "autoreload"
     ],
     "license": "MIT",
     "homepage": "http://simov.github.com/styler/",

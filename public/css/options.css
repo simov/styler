@@ -1,10 +1,38 @@
 * { outline: 0; padding: 0; margin: 0; }
 
-body { font-family: Monospace, Helvetica, Arial, Sans-Serif; font-size: 14px; line-height: 17px; color: #000; background: #333; }
+body { font-family: Monospace, Helvetica, Arial, Sans-Serif; font-size: 14px; line-height: 17px; color: #000; background: #333; padding: 70px 0 0 0; }
 
 
-#content { width: 700px; margin: 20px auto 0; }
+.shell { width: 700px; margin: auto; }
+#header { width: 100%; height: 30px; background: #333; position: fixed; top: 0; left: 0; z-index: 2; box-shadow: 0px 6px 6px #555; cursor: default; padding: 10px 0; }
+#content { width: 700px; margin: auto; }
 
+
+.tabs { font-size: 0; border-radius: 5px; box-shadow: 1px 1px 3px #aaa, -1px -1px 3px #aaa; }
+.tabs ul { list-style: none; }
+.tabs li { display: inline-block; font-size: 14px; line-height: 17px; padding: 5px 0; }
+.tabs li:first-child { border-radius: 5px 0px 0px 5px; }
+.tabs li:last-child { border-radius: 0px 5px 5px 0px; }
+.tabs a { text-decoration: none; -webkit-transition: .2s ease all; padding: 0 5px; }
+#tabs a:hover { color: #f8f8f2 !important; }
+
+#tabs { float: left; }
+#tabs a { color: #75715e; }
+#tabs li.active { background: #000; }
+#tabs li.active a { color: #f8f8f2; }
+
+#actions { float: right; }
+#actions li:first-child a { color: #66d9ef; }
+#actions li:nth-child(2) a { color: #a6e22e; }
+#actions li:last-child a { color: #f92672; }
+
+#extension-settings { display: none; }
+
+/*beauty tip*/
+.bt-content { font-size: 10px; line-height: 14px; }
+
+
+/*SR-JSON*/
 
 /*disable selection*/
 .sr-json { background: none; }
@@ -51,19 +79,3 @@ body { font-family: Monospace, Helvetica, Arial, Sans-Serif; font-size: 14px; li
 
 /*remove host*/
 .sr-json .btn-remove { background: url(../images/remove.png) no-repeat 0 0; width: 12px; height: 12px; position: absolute; top: 10px; right: 10px; z-index: 100; text-decoration: none; visibility: hidden; }
-
-/*content*/
-#content { position: relative; z-index: 1; }
-
-/*main-menu*/
-#main-menu { font-family: Monospace, Helvetica, Arial, Sans-Serif; font-size: 14px; line-height: 17px; display: inline-block; position: fixed; top: 10px; left: 46%; z-index: 100; background: #75715e; border-radius: 5px; box-shadow: 1px 1px 6px #f8f8f2, -1px -1px 6px #f8f8f2; cursor: default; }
-#main-menu ul { list-style: none; padding: 5px; }
-#main-menu li { display: inline; }
-#main-menu li:first-child a { color: #66d9ef; }
-#main-menu li:nth-child(2) a { color: #a6e22e; }
-#main-menu li:last-child a { color: #f92672; }
-#main-menu a { text-decoration: none; }
-#main-menu a:hover { color: #f8f8f2 !important; }
-
-/*beauty tip*/
-.bt-content { font-size: 10px; line-height: 14px; }
