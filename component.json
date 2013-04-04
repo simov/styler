@@ -1,0 +1,24 @@
+{
+    "name": "chrome-styler",
+    "repo": "simov/styler",
+    "description": "Chrome styling extension",
+    "version": "1.1.0",
+    "keywords": [
+        "chrome",
+        "extension",
+        "inject",
+        "autoreload"
+    ],
+    "dependencies": {
+        "hogan": "*",
+        "jquery": "1.7.2",
+        "sr-beauty-tips": "*",
+        "sr-emitter": "*",
+        "sr-file": "*",
+        "sr-json": "*"
+    },
+    "main": "",
+    "scripts": [],
+    "styles": [],
+    "license": "MIT"
+}

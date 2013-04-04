@@ -5,23 +5,21 @@
     <title>Styler Settings</title>
 
     <!-- style -->
-    <link href="module/json/css/sr-json.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="../components/sr-json/lib/sr-json.css" rel="stylesheet" type="text/css" media="all" />
     <link href="css/options.css" rel="stylesheet" type="text/css" media="all" />
 
-    <!-- libs -->
-    <script src="jslib/hoganjs/template.js" type="text/javascript" charset="utf-8"></script>
-    <script src="jslib/hoganjs/compiler.js" type="text/javascript" charset="utf-8"></script>
+    <!-- components -->
+    <script src="../components/hogan/lib/template.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../components/hogan/lib/compiler.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../components/sr-file/lib/sr-file.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../components/sr-json/lib/sr-json.js" type="text/javascript" charset="utf-8"></script>
 
-    <!-- commonjs -->
-    <script src="../lib/require.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../lib/background/module/file.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/template.js" type="text/javascript" charset="utf-8"></script>
-    <script src="module/json/sr-json.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../components/jquery/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../components/sr-beauty-tips/jquery.bt.min.js" type="text/javascript" charset="utf-8"></script>
 
     <!-- jquery -->
-    <script src="jslib/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="jslib/jquery.bt.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/sr-json-plugin.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/template.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/sr-json-ui.js" type="text/javascript" charset="utf-8"></script>
 
     <!-- main -->
     <script src="js/options.js" type="text/javascript" charset="utf-8"></script>
@@ -45,12 +43,8 @@
     </div>
 </header>
 <section id="content">
-    <div id="site-settings" class="sr-json">
-        
-    </div>
-    <div id="extension-settings" class="sr-json">
-        
-    </div>
+    <div id="site-settings" class="sr-json"></div>
+    <div id="extension-settings" class="sr-json"></div>
 </section>
 </body>
 </html>

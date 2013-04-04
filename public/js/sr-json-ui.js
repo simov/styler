@@ -64,7 +64,7 @@
             $(box).css({top: top-3});
         }
     };
-    $('.sr-json .keys').each(function (index) {
+    $('.keys', self).each(function (index) {
         $('li', this).each(function (index) {
             var text = $(this).hasClass('add') ? 'add' : 'remove';
             $(this).bt(text);
@@ -74,10 +74,11 @@
     function btPreShow (box) {
         var trigger = $(this),
             top = trigger.parent().offset().top,
+            left = trigger.parent().offset().left,
             content = $('.bt-content', box);
         $(box).css({
-            top: top - (content.outerHeight()) - 18,
-            left: trigger.parent().width() - (content.outerWidth()/2) + 4
+            top: top - (content.outerHeight()) - 3,
+            left: left + trigger.parent().width() - (content.outerWidth()/2) + 4
         });
     }
 
@@ -139,7 +140,7 @@
     $('> ul > li', self).hover(onHoverHost, onOutHost);
 
     // add/remove keys
-    $('.sr-json').on('click', '.keys li', function (e) {
+    self.on('click', '.keys li', function (e) {
         var link = $(this);
         link.hasClass('add') ? addKey(link) : removeKey(link);
         return false;

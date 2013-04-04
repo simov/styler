@@ -1,7 +1,5 @@
 
-var json = require('sr-json'),
-    template = require('template');
-
+// require('template')
 
 $(function () {
     // the ui plugin instance
@@ -15,7 +13,7 @@ $(function () {
     
     // partials
     var templates = {
-        value: 'module/json/partials/sr-json-value.html',
+        value: '../components/sr-json/lib/sr-json.html',
         keys: 'partials/keys.html',
         obj: 'partials/object.html'
     };
@@ -52,11 +50,13 @@ $(function () {
                 active.ui.addHost();
                 break;
             case link.hasClass('btn-save'):
-                var sitesData = {};
-                json.serialize(sitesData, $(sites.id+' > ul')[0].children);
-                var extensionsData = {};
-                json.serialize(extensionsData, $(extensions.id+' > ul')[0].children);
-                write(sitesData, extensionsData);
+                var data = $(sites.id+' > ul')[0].children;
+                json.serialize(data, function (sitesData) {
+                    var data = $(extensions.id+' > ul')[0].children;
+                    json.serialize(data, function (extensionsData) {
+                        write(sitesData, extensionsData);
+                    });
+                });
                 break;
             case link.hasClass('btn-undo'):
                 read();
@@ -100,9 +100,3 @@ $(function () {
         });
     }
 });
-
-console.log = function (name, object) {
-    console.group(name);
-    console.dir(object);
-    console.groupEnd();
-}

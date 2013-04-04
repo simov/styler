@@ -17,3 +17,4 @@ npm-debug.log
 
 sites/*
 !sites/github
+components

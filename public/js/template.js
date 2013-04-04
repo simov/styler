@@ -1,13 +1,11 @@
-require.register('template', function (module, exports, require) {
 
+// require('file');
+var template = {};
 
-var file = require('file');
-
-
-exports.add = function (path, name, cb) {
+template.add = function (path, name, cb) {
     file.load(path, function (err, data) {
         if (err) return cb(err);
-        exports[name] = {
+        template[name] = {
             path: path,
             html: data,
             compiled: Hogan.compile(data),
@@ -19,17 +17,14 @@ exports.add = function (path, name, cb) {
     });
 }
 
-exports.load = function (paths, cb) {
+template.load = function (paths, cb) {
     var keys = Object.keys(paths);
     (function loop (index) {
         if (index == keys.length) return cb(null);
         var name = keys[index];
-        exports.add(paths[name], name, function (err) {
+        template.add(paths[name], name, function (err) {
             if (err) return cb(err);
             loop(++index);
         });
     }(0));
 }
-
-
-});

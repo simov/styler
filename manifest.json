@@ -1,15 +1,16 @@
 {
     "manifest_version": 2,
     "name"            : "Styler",
-    "version"         : "1.1",
+    "version"         : "1.1.0",
     "description"     : "Whatever",
 
     "options_page"    : "public/options.html",
     "background" : {
         "scripts": [
-            "lib/require.js",
-            "lib/emitter.js",
-            "lib/background/module/file.js",
+            // components
+            "components/sr-emitter/lib/sr-emitter.js",
+            "components/sr-file/lib/sr-file.js",
+            // background
             "lib/background/module/client.js",
             "lib/background/module/settings.js",
             "lib/background/index.js"
@@ -20,7 +21,6 @@
         {
             "matches": ["<all_urls>"],
             "js": [
-                "lib/require.js",
                 "lib/client/module/inject.js",
                 "lib/client/index.js"
             ],
