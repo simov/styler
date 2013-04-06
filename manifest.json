@@ -38,7 +38,8 @@
     "permissions": [
         "tabs",
         "storage",
-        "management"
+        "management",
+        "webNavigation"
     ],
 
     "content_security_policy": "script-src 'unsafe-eval'; object-src 'self'"
