@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name"            : "Styler",
-    "version"         : "1.1.0",
+    "version"         : "1.1.1",
     "description"     : "Whatever",
 
     "options_page"    : "public/options.html",
@@ -12,7 +12,7 @@
             "components/sr-file/lib/sr-file.js",
             // background
             "lib/background/modules/log.js",
-            "lib/background/modules/inject.js",
+            "lib/background/modules/utils.js",
             "lib/background/modules/client.js",
             "lib/background/modules/settings.js",
             "lib/background/index.js"
@@ -41,8 +41,7 @@
         "tabs",
         "storage",
         "management",
-        "webNavigation",
-        "<all_urls>"
+        "webNavigation"
     ],
 
     "content_security_policy": "script-src 'unsafe-eval'; object-src 'self'"
