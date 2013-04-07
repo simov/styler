@@ -11,8 +11,10 @@
             "components/sr-emitter/lib/sr-emitter.js",
             "components/sr-file/lib/sr-file.js",
             // background
-            "lib/background/module/client.js",
-            "lib/background/module/settings.js",
+            "lib/background/modules/log.js",
+            "lib/background/modules/inject.js",
+            "lib/background/modules/client.js",
+            "lib/background/modules/settings.js",
             "lib/background/index.js"
         ]
     },
@@ -21,8 +23,8 @@
         {
             "matches": ["<all_urls>"],
             "js": [
-                "lib/client/module/inject.js",
-                "lib/client/index.js"
+                "lib/content/modules/inject.js",
+                "lib/content/index.js"
             ],
             "run_at": "document_start",
             "all_frames": true
@@ -39,7 +41,8 @@
         "tabs",
         "storage",
         "management",
-        "webNavigation"
+        "webNavigation",
+        "<all_urls>"
     ],
 
     "content_security_policy": "script-src 'unsafe-eval'; object-src 'self'"
