@@ -2,7 +2,7 @@
     "name": "chrome-styler",
     "repo": "simov/styler",
     "description": "Chrome styling extension",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "keywords": [
         "chrome",
         "extension",
