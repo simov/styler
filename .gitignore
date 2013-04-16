@@ -16,5 +16,5 @@ node_modules
 npm-debug.log
 
 sites/*
-!sites/github
+!sites/github/monokai-theme-github-code-view-and-gist.css
 components
