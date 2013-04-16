@@ -34,7 +34,3 @@ By default you get the [Monokai Theme for GitHub code view and Gist](https://gis
 
     `$ node lib/server/`
 - Reload the extension.
-- Reload the pages.
-
-##Wiki
-Make sure you check out the [wiki](https://github.com/simov/styler/wiki).
