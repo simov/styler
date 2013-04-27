@@ -7,12 +7,13 @@ Styler is a chrome extension that enables you to:
 - Auto reload web pages on file changed.
 - Auto reload chrome extensions on file changed.
 
-##Installation
+##Install
 - Navigate to the Styler's directory.
 
-    `$ bower install`
-
-    `$ npm install`
+```bash
+    $ bower install
+    $ npm install
+```
 - Fire up chrome and navigate to `chrome://extensions`
 - Click on `Load unpacked extension ...` and select the folder of this repository.
 
@@ -29,8 +30,12 @@ By default you get the [Monokai Theme for GitHub code view and Gist](https://gis
 
 - Check the server's configuration file in `config/server.json`
 
-    `{"host": "localhost", "port": 3000}`
+```js
+    {"host": "localhost", "port": 3000}
+```
 - Run the server.
 
-    `$ node lib/server/`
+```bash
+    $ node lib/server/
+```
 - Reload the extension.
