@@ -30,11 +30,12 @@ var inject = {
 }
 
 
-chrome.extension.sendMessage({message: 'onload', location:window.location}, function (res) {
-  switch (res.message) {
-    case 'inject':
-      inject.style(res.code.css)
-      inject.script(res.code.js)
-    break
+chrome.extension.sendMessage({
+  message:'onload',
+  location:window.location
+}, function (res) {
+  if (res.message == 'inject') {
+    inject.style(res.code.css)
+    inject.script(res.code.js)
   }
 })
