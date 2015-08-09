@@ -1,8 +1,8 @@
 
 var utils = {
-  find: function (url) {
-    for (var name in settings) {
-      var site = settings[name]
+  find: function (url, config) {
+    for (var name in config) {
+      var site = config[name]
       for (var i=0; i < site.domains.length; i++) {
         if (url.host == site.domains[i]) {
           return {name:name, site:site}

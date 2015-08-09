@@ -9,7 +9,8 @@
       "background/file.js",
       "background/utils.js",
       "background/background.js"
-    ]
+    ],
+    "persistent": false
   },
 
   "content_scripts": [

@@ -1,17 +1,9 @@
-
-// should load it from the setes/config.json
-var settings = {}
+// chrome.storage.sync.clear();
 
 file.load('sites/config.json', function (err, body) {
-  settings = JSON.parse(body)
+  var config = JSON.parse(body)
+  chrome.storage.sync.set(config)
 })
-
-// storage and reload
-// chrome.storage.sync.get(function (data) {
-//   settings.data = data
-//   settings.sort()
-// })
-
 
 // events
 
@@ -24,12 +16,14 @@ chrome.extension.onMessage.addListener(function (req, sender, res) {
 
 var a = {
   inject: function (req, sender, res) {
-    var config = utils.find(req.location)
-    if (!config) return res({message:'error'})
+    chrome.storage.sync.get(function (config) {
+      var site = utils.find(req.location, config)
+      if (!site) return res({message:'error'})
 
-    utils.load(config, function (err, code) {
-      if (err) return res({message:'error'})
-      res({message:'inject', code:code})
+      utils.load(site, function (err, code) {
+        if (err) return res({message:'error'})
+        res({message:'inject', code:code})
+      })
     })
   }
 }
