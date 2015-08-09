@@ -2,7 +2,7 @@
 
 file.load('sites/config.json', function (err, body) {
   var config = JSON.parse(body)
-  chrome.storage.sync.set(config)
+  chrome.storage.local.set(config)
 })
 
 // events
@@ -16,7 +16,7 @@ chrome.extension.onMessage.addListener(function (req, sender, res) {
 
 var a = {
   inject: function (req, sender, res) {
-    chrome.storage.sync.get(function (config) {
+    chrome.storage.local.get(function (config) {
       var site = utils.find(req.location, config)
       if (!site) return res({message:'error'})
 
