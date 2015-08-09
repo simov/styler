@@ -23,10 +23,13 @@ chrome.extension.onMessage.addListener(function (req, sender, res) {
 // action
 
 var a = {
-  onload: function (req, sender, res) {
-    utils.inject(req.location, function (err, code) {
-      if (err) return res({message: 'error'})
-      res({message: 'inject', code: code})
+  inject: function (req, sender, res) {
+    var config = utils.find(req.location)
+    if (!config) return res({message:'error'})
+
+    utils.load(config, function (err, code) {
+      if (err) return res({message:'error'})
+      res({message:'inject', code:code})
     })
   }
 }

@@ -1,51 +1,46 @@
 
-var utils = {}
-
-
-utils.match = function (url) {
-  for (var key in settings) {
-    var site = settings[key]
-    for (var i=0; i < site.domains.length; i++) {
-      if (url.host == site.domains[i]) {
-        return site
+var utils = {
+  find: function (url) {
+    for (var name in settings) {
+      var site = settings[name]
+      for (var i=0; i < site.domains.length; i++) {
+        if (url.host == site.domains[i]) {
+          return {name:name, site:site}
+        }
       }
     }
-  }
-}
+  },
 
-// The custom code is injected into style and script tags
-// at the end of the document body
-// in order to give them enough weight for successful override
+  // The custom code is injected into style and script tags
+  // at the end of the document body
+  // in order to give them enough weight for successful override
+  // requires: file
+  load: function (config, done) {
+    var site = config.site
+    if (!site.enabled || !site.inject) return done(true)
 
-// requires: file
-utils.inject = function (url, done) {
-  if (!url) return done(true)
-  var site = this.match(url)
-  if (!site) return done(true)
-
-  if (!site.enabled || !site.inject) return done(true)
-
-  var styles = (site.inject.css || []).map(function (file) {
-    return ['sites', site.directory, file].join('/')
-  })
-  var scripts = (site.inject.js || []).map(function (file) {
-    return ['sites', site.directory, file].join('/')
-  })
-
-  file.loadList(styles, function (err, css) {
-    if (err) return done({err: err})
-    file.loadList(scripts, function (err, js) {
-      if (err) return done({err: err})
-      done(null, {css: concat(css), js: concat(js)})
+    var styles = (site.inject.css || []).map(function (file) {
+      return ['sites', config.name, file].join('/')
     })
-  })
-}
+    var scripts = (site.inject.js || []).map(function (file) {
+      return ['sites', config.name, file].join('/')
+    })
 
-function concat (result) {
-  var str = ''
-  for (var file in result) {
-    var code = result[file]
-    str += '\n/*'+file+'*/\n'+code
+    file.loadList(styles, function (err, css) {
+      if (err) return done({err: err})
+      file.loadList(scripts, function (err, js) {
+        if (err) return done({err: err})
+        done(null, {css:utils.concat(css), js:utils.concat(js)})
+      })
+    })
+  },
+
+  concat: function (files) {
+    var str = ''
+    for (var name in files) {
+      var code = files[name]
+      str += '\n/*'+name+'*/\n'+code
+    }
+    return str
   }
-  return str
 }

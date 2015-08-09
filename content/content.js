@@ -31,7 +31,7 @@ var inject = {
 
 
 chrome.extension.sendMessage({
-  message:'onload',
+  message:'inject',
   location:window.location
 }, function (res) {
   if (res.message == 'inject') {
