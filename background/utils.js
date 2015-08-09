@@ -52,12 +52,19 @@ utils.inject = (function () {
     var path = this.match(url.host + (url.path || ''), sorted)
     if (!path) return cb(true)
 
-    if (!settings[path].enabled || !settings[path].inject) return cb(true)
-    var inject = settings[path].inject || {}
+    var config = settings[path]
+    if (!config.enabled || !config.inject) return cb(true)
 
-    file.loadList(inject.css || [], function (err, css) {
+    var styles = (config.inject.css || []).map(function (file) {
+      return ['sites', config.name, file].join('/')
+    })
+    var scripts = (config.inject.js || []).map(function (file) {
+      return ['sites', config.name, file].join('/')
+    })
+
+    file.loadList(styles, function (err, css) {
       if (err) return cb({err: err})
-      file.loadList(inject.js || [], function (err, js) {
+      file.loadList(scripts, function (err, js) {
         if (err) return cb({err: err})
         cb(null, {css: map(css), js: map(js)})
       })
