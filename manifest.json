@@ -2,15 +2,14 @@
   "manifest_version": 2,
   "name"            : "Styler",
   "version"         : "1.0",
-  "description"     : "Injects css and js into pages",
+  "description"     : "Inject styles and scripts into pages",
 
   "background": {
     "scripts": [
       "background/file.js",
       "background/utils.js",
       "background/background.js"
-    ],
-    "persistent": false
+    ]
   },
 
   "content_scripts": [
@@ -30,7 +29,5 @@
     "128" : "images/icon128.png"
   },
 
-  "permissions": [
-    "storage"
-  ]
+  "permissions": []
 }
