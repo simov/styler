@@ -39,7 +39,7 @@ var utils = {
     var str = ''
     for (var name in files) {
       var code = files[name]
-      str += '\n/*'+name+'*/\n'+code
+      str += '\n/*'+name+'*/\n'+code.replace(/@-moz-document[^{]*\{/gi, '')
     }
     return str
   }
