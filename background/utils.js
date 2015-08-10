@@ -12,7 +12,7 @@ var utils = {
   },
 
   // The custom code is injected into style and script tags
-  // at the end of the document body
+  // at the end of the head tag
   // in order to give them enough weight for successful override
   // requires: file
   load: function (config, done) {
