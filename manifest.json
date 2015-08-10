@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name"            : "Styler Next",
-  "version"         : "0.0.0",
+  "name"            : "Styler",
+  "version"         : "1.0",
   "description"     : "Injects css and js into pages",
 
   "background": {
@@ -24,16 +24,13 @@
     }
   ],
 
-  // "icons": {
-  //   "16"  : "public/images/icon16.png",
-  //   "48"  : "public/images/icon48.png",
-  //   "128" : "public/images/icon128.png"
-  // },
+  "icons": {
+    "16"  : "images/icon16.png",
+    "48"  : "images/icon48.png",
+    "128" : "images/icon128.png"
+  },
 
   "permissions": [
-    "tabs",
-    "storage",
-    "management",
-    "webNavigation"
+    "storage"
   ]
 }
