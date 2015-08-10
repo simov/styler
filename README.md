@@ -1,14 +1,15 @@
 
 # Styler / Chrome Extension
 
-Styler lets you inject `.css` and `.js` files into the web sites you visit
+Styler lets you inject `.css` and `.js` files into web sites you visit
 
 
 ## Install
 
 1. Pull this repository
 2. Navigate to `chrome://extensions`
-3. Click on the `Load unpacked extension ...` button and select the folder where you downloaded the repository
+3. Make sure that the `Developer mode` checkbox in the top right corner is checked
+4. Click on the `Load unpacked extension ...` button and select the folder where you downloaded this repository
 
 
 ## Configuration
@@ -56,7 +57,7 @@ sites/
 
 ```
 
-1. Create a folder called `sites` in the styler folder
+1. Create a folder called `sites` under the root folder of this extension
 2. Copy the above configuration in `sites/config.json`
 3. Create two separate directories: `sites/github` and `sites/youtube`, and place your styles and scripts there
-4. Each time you make changes to the configuration or the styles you have to click the `Reload (Ctrl+R)` button for the Styler extension in `chrome://extensions`
+4. Each time you make changes to the configuration or the styles, you have to click the `Reload (Ctrl+R)` link of the Styler extension under `chrome://extensions`
