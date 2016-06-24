@@ -1,29 +1,29 @@
 
 var inject = {
-  style: function (string) {
+  style: (string) => {
     var style = document.createElement('style')
     style.type = 'text/css'
     style.innerHTML = string
     document.head.appendChild(style)
   },
-  script: function (string) {
+  script: (string) => {
     var script = document.createElement('script')
     script.type = 'text/javascript'
     script.charset = 'utf-8'
     script.innerHTML = string
     document.head.appendChild(script)
   },
-  css: function (path) {
+  css: (path) => {
     var link = document.createElement('link')
     link.rel = 'stylesheet'
     link.type = 'text/css'
     link.href = chrome.extension.getURL(path)
     document.head.appendChild(link)
   },
-  js: function (path) {
+  js: (path) => {
     var script = document.createElement('script')
-    script.charset = 'utf-8'
     script.type = 'text/javascript'
+    script.charset = 'utf-8'
     script.src = chrome.extension.getURL(path)
     document.head.appendChild(script)
   }
@@ -31,10 +31,10 @@ var inject = {
 
 
 chrome.extension.sendMessage({
-  message:'inject',
-  location:window.location
-}, function (res) {
-  if (res.message == 'inject') {
+  message: 'inject',
+  location: window.location
+}, (res) => {
+  if (res.message === 'inject') {
     inject.style(res.code.css)
     inject.script(res.code.js)
   }
