@@ -24,9 +24,9 @@ Styler lets you inject `.css` and `.js` files into web sites you visit
     ],
     "inject": {
       "css": [
-        "github-general-fixes.css",
         "github-dark.css",
-        "github-pygments.css"
+        "pygments.css",
+        "fixes.css"
       ]
     }
   },
@@ -37,8 +37,12 @@ Styler lets you inject `.css` and `.js` files into web sites you visit
       "www.youtube.com"
     ],
     "inject": {
-      "css": ["youtube.css"],
-      "js": ["some.js"]
+      "css": [
+        "fixes.css"
+      ],
+      "js": [
+        "ads.js"
+      ]
     }
   }
 }
@@ -48,18 +52,18 @@ Styler lets you inject `.css` and `.js` files into web sites you visit
 sites/
 ├── config.json
 ├── github
+│   ├── fixes.css
 │   ├── github-dark.css
-│   ├── github-general-fixes.css
-│   └── github-pygments.css
+│   └── pygments.css
 └── youtube
-    ├── some.js
-    └── youtube.css
+    ├── ads.js
+    └── fixes.css
 
 ```
 
 1. Create a folder called `sites` under the root directory of this extension
 2. Copy the above configuration in `sites/config.json`
 3. Create two separate directories: `sites/github` and `sites/youtube`, and place your styles and scripts there
-4. Repeat step 3. for each web site that you want to style
+4. Repeat step `3.` for each web site you want to style
 
-Every time you make changes to the configuration data structure, you have to click on the `Reload (Ctrl+R)` link of the Styler extension in `chrome://extensions`
+Each time you make changes to the configuration data structure, you have to click on the `Reload (Ctrl+R)` link of the Styler extension in `chrome://extensions`
