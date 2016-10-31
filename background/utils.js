@@ -3,11 +3,9 @@ var utils = {
   find: (url, config) => {
     for (var key in config) {
       var item = config[key]
-      for (var i=0; i < item.domains.length; i++) {
-        if (url.host === item.domains[i]) {
-          item.key = key
-          return item
-        }
+      if (item.domains.some((domain) => (url.host === domain))) {
+        item.key = key
+        return item
       }
     }
   },
@@ -36,10 +34,8 @@ var utils = {
   },
 
   concat: (files) =>
-    Object.keys(files).reduce((str, name) => {
-      var code = files[name]
-      str += '\n/*' + name + '*/\n' +
-        code.replace(/@-moz-document[^{]*\{/gi, '')
-      return str
-    }, '')
+    Object.keys(files).reduce((code, index) =>
+      (code += '\n/*' + index + '*/\n' +
+        files[index].replace(/@-moz-document[^{]*\{/gi, '')) || code
+    , '')
 }
