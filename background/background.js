@@ -1,31 +1,23 @@
 
 var config
 
-file.load('sites/config.json', (err, body) => {
+file()('sites/config.json', (err, body) => {
   config = JSON.parse(body)
 })
 
-// events
-
 chrome.extension.onMessage.addListener((req, sender, res) => {
-  a[req.message](req, sender, res)
-  return true
-})
-
-// action
-
-var a = {
-  inject: (req, sender, res) => {
+  if (req.message === 'inject') {
     var site = utils.find(req.location, config)
     if (!site) {
-      return res({message: 'error'})
+      res({message: 'error', body: req.location.host + ' not configured'})
+      return
     }
 
-    utils.load(site, (err, code) => {
-      if (err) {
-        return res({message: 'error'})
-      }
-      res({message: 'inject', code: code})
-    })
+    utils.load(site, (err, code) => (
+      err
+      ? res({message: 'error', body: err.message})
+      : res({message: 'inject', body: code})
+    ))
   }
-}
+  return true
+})

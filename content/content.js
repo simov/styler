@@ -29,13 +29,15 @@ var inject = {
   }
 }
 
-
 chrome.extension.sendMessage({
   message: 'inject',
   location: window.location
 }, (res) => {
-  if (res.message === 'inject') {
-    inject.style(res.code.css)
-    inject.script(res.code.js)
+  if (res.message === 'error') {
+    // console.log(res.body)
+  }
+  else if (res.message === 'inject') {
+    inject.style(res.body.css)
+    inject.script(res.body.js)
   }
 })

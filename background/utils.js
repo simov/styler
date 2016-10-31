@@ -14,27 +14,30 @@ var utils = {
   // The custom code is injected into style and script tags
   // at the end of the head tag
   // in order to give them enough weight for successful override
-  // requires: file
   load: (config, done) => {
     var site = config.site
     if (!site.enabled || !site.inject) {
-      return done(true)
+      done(new Error(config.name + 'not enabled'))
+      return
     }
 
-    var styles = (site.inject.css || []).map((file) => {
-      return ['sites', config.name, file].join('/')
-    })
-    var scripts = (site.inject.js || []).map((file) => {
-      return ['sites', config.name, file].join('/')
-    })
+    var load = file({promise: true})
 
-    file.loadList(styles, (err, css) => {
-      if (err) return done({err: err})
-      file.loadList(scripts, (err, js) => {
-        if (err) return done({err: err})
-        done(null, {css: utils.concat(css), js: utils.concat(js)})
-      })
-    })
+    var styles = (site.inject.css || [])
+      .map((file) => load('sites/' + config.name + '/' + file))
+    var scripts = (site.inject.js || [])
+      .map((file) => load('sites/' + config.name + '/' + file))
+
+    Promise.all([
+      new Promise((resolve, reject) => Promise.all(styles)
+        .then((styles) => resolve({css: utils.concat(styles)})).catch(reject)
+      ),
+      new Promise((resolve, reject) => Promise.all(scripts)
+        .then((scripts) => resolve({js: utils.concat(scripts)})).catch(reject)
+      )
+    ])
+    .then((result) => done(null, {css: result[0].css, js: result[1].js}))
+    .catch(done)
   },
 
   concat: (files) =>
