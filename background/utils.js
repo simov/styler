@@ -1,11 +1,12 @@
 
 var utils = {
   find: (url, config) => {
-    for (var name in config) {
-      var site = config[name]
-      for (var i=0; i < site.domains.length; i++) {
-        if (url.host === site.domains[i]) {
-          return {name: name, site: site}
+    for (var key in config) {
+      var item = config[key]
+      for (var i=0; i < item.domains.length; i++) {
+        if (url.host === item.domains[i]) {
+          item.key = key
+          return item
         }
       }
     }
@@ -14,19 +15,13 @@ var utils = {
   // The custom code is injected into style and script tags
   // at the end of the head tag
   // in order to give them enough weight for successful override
-  load: (config, done) => {
-    var site = config.site
-    if (!site.enabled || !site.inject) {
-      done(new Error(config.name + 'not enabled'))
-      return
-    }
-
+  load: (item, done) => {
     var load = file({promise: true})
 
-    var styles = (site.inject.css || [])
-      .map((file) => load('sites/' + config.name + '/' + file))
-    var scripts = (site.inject.js || [])
-      .map((file) => load('sites/' + config.name + '/' + file))
+    var styles = (item.inject.css || [])
+      .map((file) => load('sites/' + item.key + '/' + file))
+    var scripts = (item.inject.js || [])
+      .map((file) => load('sites/' + item.key + '/' + file))
 
     Promise.all([
       new Promise((resolve, reject) => Promise.all(styles)
