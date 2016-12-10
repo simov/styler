@@ -14,28 +14,33 @@ var utils = {
   // at the end of the head tag
   // in order to give them enough weight for successful override
   load: (item, done) => {
-    var load = file({promise: true})
+    var load = file()
+    var css = [], js = []
 
-    var styles = (item.inject.css || [])
-      .map((file) => load('sites/' + item.key + '/' + file))
-    var scripts = (item.inject.js || [])
-      .map((file) => load('sites/' + item.key + '/' + file))
+    var exit = () =>
+      (
+        css.length === (item.inject.css || []).length &&
+        js.length === (item.inject.js || []).length
+      ) &&
+      done(null, {css: utils.concat(css), js: utils.concat(js)})
 
-    Promise.all([
-      new Promise((resolve, reject) => Promise.all(styles)
-        .then((styles) => resolve({css: utils.concat(styles)})).catch(reject)
-      ),
-      new Promise((resolve, reject) => Promise.all(scripts)
-        .then((scripts) => resolve({js: utils.concat(scripts)})).catch(reject)
-      )
-    ])
-    .then((result) => done(null, {css: result[0].css, js: result[1].js}))
-    .catch(done)
+    var loop = (filtes, result) => {
+      for (var i=0; i < filtes.length; i++) {
+        load('sites/' + item.key + '/' + filtes[i], (err, code) => {
+          result.push({file: filtes[i], code})
+          exit()
+        })
+      }
+    }
+
+    loop(item.inject.css || [], css)
+    loop(item.inject.js || [], js)
   },
 
-  concat: (files) =>
-    Object.keys(files).reduce((code, index) =>
-      (code += '\n/*' + index + '*/\n' +
-        files[index].replace(/@-moz-document[^{]*\{/gi, '')) || code
+  concat: (items) =>
+    items.reduce((result, item) =>
+      (result += '\n/*' + item.file + '*/\n' +
+        item.code.replace(/@-moz-document[^{]*\{/gi, '')
+      ) || result
     , '')
 }
