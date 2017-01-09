@@ -20,12 +20,12 @@ chrome.extension.onMessage.addListener((req, sender, res) => {
     var item = domains[req.location.host]
 
     if (item) {
-      if (item.cache && item.code) {
+      if (item.cached && item.code) {
         res({message: 'inject', body: item.code})
       }
       else {
         load(item, (err, code) => {
-          if (item.cache) {
+          if (item.cached) {
             item.code = code
           }
           res({message: 'inject', body: code})
