@@ -18,6 +18,7 @@ Styler lets you inject `.css` and `.js` files into web sites you visit
 {
   "github": {
     "enabled": true,
+    "cache": true,
     "domains": [
       "github.com",
       "gist.github.com"
@@ -33,6 +34,7 @@ Styler lets you inject `.css` and `.js` files into web sites you visit
 
   "youtube": {
     "enabled": true,
+    "cache": false,
     "domains": [
       "www.youtube.com"
     ],
