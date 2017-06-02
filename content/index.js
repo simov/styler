@@ -33,10 +33,10 @@ chrome.extension.sendMessage({
   message: 'inject',
   location: window.location
 }, (res) => {
-  if (res.message === 'error') {
+  if (res && res.message === 'error') {
     // console.log(res.body)
   }
-  else if (res.message === 'inject') {
+  else if (res && res.message === 'inject') {
     inject.style(res.body.css)
     inject.script(res.body.js)
   }
