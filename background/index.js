@@ -16,7 +16,6 @@ file()('sites/config.json', (err, body) => {
 })
 
 var send = (tab, domain) => {
-  console.log(domain)
   if (domain.cached && domain.code) {
     chrome.tabs.sendMessage(tab.id, {message: 'inject', body: domain.code})
   }
