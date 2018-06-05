@@ -15,23 +15,28 @@ file()('sites/config.json', (err, body) => {
     }, {})
 })
 
-chrome.extension.onMessage.addListener((req, sender, res) => {
-  if (req.message === 'inject') {
-    var item = domains[req.location.host]
+var send = (tab, domain) => {
+  console.log(domain)
+  if (domain.cached && domain.code) {
+    chrome.tabs.sendMessage(tab.id, {message: 'inject', body: domain.code})
+  }
+  else {
+    load(domain, (err, code) => {
+      if (domain.cached) {
+        domain.code = code
+      }
+      chrome.tabs.sendMessage(tab.id, {message: 'inject', body: code})
+    })
+  }
+}
 
-    if (item) {
-      if (item.cached && item.code) {
-        res({message: 'inject', body: item.code})
-      }
-      else {
-        load(item, (err, code) => {
-          if (item.cached) {
-            item.code = code
-          }
-          res({message: 'inject', body: code})
-        })
-      }
+chrome.runtime.onMessage.addListener((req, sender, res) => {
+  if (req.message === 'check') {
+    if (domains['*']) {
+      send(sender.tab, domains['*'])
+    }
+    if (domains[req.location.host]) {
+      send(sender.tab, domains[req.location.host])
     }
   }
-  return true
 })

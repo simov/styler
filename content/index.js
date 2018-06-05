@@ -29,15 +29,14 @@ var inject = {
   }
 }
 
-chrome.extension.sendMessage({
-  message: 'inject',
+chrome.runtime.sendMessage({
+  message: 'check',
   location: window.location
-}, (res) => {
-  if (res && res.message === 'error') {
-    // console.log(res.body)
-  }
-  else if (res && res.message === 'inject') {
-    inject.style(res.body.css)
-    inject.script(res.body.js)
+})
+
+chrome.runtime.onMessage.addListener((req, sender, res) => {
+  if (req.message === 'inject') {
+    inject.style(req.body.css)
+    inject.script(req.body.js)
   }
 })
