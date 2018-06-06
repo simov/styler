@@ -1,65 +1,89 @@
 
 # Styler / Chrome Extension
 
-Styler lets you inject `.css` and `.js` files into web sites you visit
+Styler lets you inject `.css` and `.js` files into web sites you visit.
 
 
 ## Install
 
 1. Pull this repository
 2. Navigate to `chrome://extensions`
-3. Make sure the `Developer mode` checkbox in the top right corner is checked
-4. Click on the `Load unpacked extension ...` button and select the folder containing this repository
+3. Make sure that the `Developer mode` checkbox in the top right corner is checked
+4. Click on the `Load Unpacked` button and select the folder containing this repository
 
 
 ## Configuration
 
+Option       | Defaults | Description
+:---         | :--:     | :---
+__enable__   | `false`  | Toggle configuration
+__cache__    | `false`  | Toggle caching
+__match__    | `[]`     | List of domains to match
+__ignore__   | `[]`     | List of domains to ignore
+__inject__   | `[]`     | List of files to inject
+__location__ | `''`     | Files location
+
+> When `cache` is enabled you have to `Reload` the extension every time you make changes to the `inject`ed files.
+
+> When `match` is set to `['*']` it is going to match every domain.
+
+> When `location` is ommited it defaults to the `sites` folder.
+
+## Example
+
 ```js
-{
-  "github": {
-    "enabled": true,
-    "cached": true,
-    "domains": [
+[
+  {
+    "enable": true,
+    "cache": true,
+    "match": [
+      "*"
+    ],
+    "ignore": [
+      "google.com"
+    ],
+    "inject": [
+      "global-font.css"
+    ]
+  },
+  {
+    "enable": true,
+    "cache": false,
+    "match": [
       "github.com",
       "gist.github.com"
     ],
-    "inject": {
-      "css": [
-        "github-dark.css",
-        "pygments.css",
-        "fixes.css"
-      ]
-    }
-  },
-
-  "youtube": {
-    "enabled": true,
-    "cached": false,
-    "domains": [
-      "www.youtube.com"
+    "inject": [
+      "dark-theme.css",
+      "fixes.css"
     ],
-    "inject": {
-      "css": [
-        "fixes.css"
-      ],
-      "js": [
-        "ads.js"
-      ]
-    }
+    "location": "github"
+  },
+  {
+    "enable": false,
+    "cache": true,
+    "match": [
+      "youtube.com"
+    ],
+    "inject": [
+      "youtube.css",
+      "ads.js"
+    ],
+    "location": "youtube"
   }
-}
+]
 ```
 
 ```
 sites/
 ├── config.json
+├── global-font.css
 ├── github
 │   ├── fixes.css
-│   ├── github-dark.css
-│   └── pygments.css
+│   └── dark-theme.css
 └── youtube
     ├── ads.js
-    └── fixes.css
+    └── youtube.css
 
 ```
 
@@ -68,4 +92,4 @@ sites/
 3. Create two separate directories: `sites/github` and `sites/youtube`, and place your styles and scripts there
 4. Repeat step `3.` for each web site you want to style
 
-Each time you make changes to the configuration data structure, you have to click on the `Reload (Ctrl+R)` link of the Styler extension in `chrome://extensions`
+> Every time you make changes to the configuration data structure you have to `Reload` the extension from `chrome://extensions`
