@@ -29,10 +29,13 @@ var inject = {
   }
 }
 
-chrome.runtime.sendMessage({
-  message: 'check',
-  location: window.location
-})
+// do not send message for iframes
+if (window.location === window.top.location) {
+  chrome.runtime.sendMessage({
+    message: 'check',
+    location: window.location
+  })
+}
 
 chrome.runtime.onMessage.addListener((req, sender, res) => {
   if (req.message === 'inject') {

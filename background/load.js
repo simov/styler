@@ -2,35 +2,36 @@
 // The custom code is injected into style and script tags
 // at the end of the head tag
 // in order to give them enough weight for successful override
-function load (item, done) {
-  var load = file()
-  var css = [], js = []
 
-  var exit = () =>
-    (
-      css.length === (item.inject.css || []).length &&
-      js.length === (item.inject.js || []).length
-    ) &&
-    done(null, {css: concat(css), js: concat(js)})
-
-  var loop = (files, result) => {
-    for (var i=0; i < files.length; i++) {
-      ;((file) => {
-        load('sites/' + item.key + '/' + file, (err, code) => {
-          result.push({file, code})
-          exit()
-        })
-      })(files[i])
-    }
+function parallel (get, location, files, done) {
+  var result = []
+  for (var i=0; i < files.length; i++) {
+    ;((name) => {
+      get(location + name, (err, code) => {
+        result.push({name, code})
+        if (result.length === files.length) {
+          done(result)
+        }
+      })
+    })(files[i])
   }
-
-  loop(item.inject.css || [], css)
-  loop(item.inject.js || [], js)
 }
 
-var concat = (items) =>
-  items.reduce((result, item) =>
-    (result += '\n/*' + item.file + '*/\n' +
-      item.code.replace(/@-moz-document[^{]*\{/gi, '').replace(/`/g, '')
-    ) || result
-  , '')
+function load (item, done) {
+  var get = file()
+  var location = 'sites/' + (item.location ? item.location + '/' : '')
+
+  parallel(get, location, item.inject, (files) => {
+    var css = js = ''
+    for (var i=0; i < files.length; i++) {
+      if (/\.css$/.test(files[i].name)) {
+        css += '\n/*' + files[i].name + '*/\n' + files[i].code
+          .replace(/@-moz-document[^{]*\{/gi, '').replace(/`/g, '')
+      }
+      else if (/\.js$/.test(files[i].name)) {
+        js += '\n/*' + files[i].name + '*/\n' + files[i].code
+      }
+    }
+    done({css, js})
+  })
+}

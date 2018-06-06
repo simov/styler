@@ -1,28 +1,25 @@
 
-var domains
+var match
 
-file()('sites/config.json', (err, body) => {
-  var config = JSON.parse(body)
-
-  domains = Object.keys(config)
-    .filter((key) => (config[key].enabled && config[key].inject))
-    .reduce((map, key) => {
-      config[key].domains.forEach((domain) => {
-        config[key].key = key
-        map[domain] = config[key]
+file()('sites/config.json', (err, config) => {
+  match = JSON.parse(config)
+    .filter(({enable, match, inject}) => enable && match && inject)
+    .reduce((all, item) => {
+      item.match.forEach((domain) => {
+        all[domain] = item
       })
-      return map
+      return all
     }, {})
 })
 
-var send = (tab, domain) => {
-  if (domain.cached && domain.code) {
-    chrome.tabs.sendMessage(tab.id, {message: 'inject', body: domain.code})
+var send = (tab, item) => {
+  if (item.cache && item.code) {
+    chrome.tabs.sendMessage(tab.id, {message: 'inject', body: item.code})
   }
   else {
-    load(domain, (err, code) => {
-      if (domain.cached) {
-        domain.code = code
+    load(item, (code) => {
+      if (item.cache) {
+        item.code = code
       }
       chrome.tabs.sendMessage(tab.id, {message: 'inject', body: code})
     })
@@ -31,11 +28,13 @@ var send = (tab, domain) => {
 
 chrome.runtime.onMessage.addListener((req, sender, res) => {
   if (req.message === 'check') {
-    if (domains['*']) {
-      send(sender.tab, domains['*'])
+    if (match['*']) {
+      if (!(match['*'].ignore || []).includes(req.location.host)) {
+        send(sender.tab, match['*'])
+      }
     }
-    if (domains[req.location.host]) {
-      send(sender.tab, domains[req.location.host])
+    if (match[req.location.host]) {
+      send(sender.tab, match[req.location.host])
     }
   }
 })
