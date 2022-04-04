@@ -1,0 +1,38 @@
+[
+  {
+    "id" : 1,
+    "priority": 1,
+    "condition": {
+      "urlFilter": "*://*/*",
+      "resourceTypes": ["main_frame"]
+    },
+    "action": {
+      "type": "modifyHeaders",
+      "responseHeaders": [
+        // works
+        // NOTE: content-security-policy cannot be removed
+        // {
+        //   "header": "content-encoding",
+        //   "operation": "remove"
+        // },
+        {
+          // did not work for github.com ...
+          "header": "content-security-policy",
+          "operation": "append", // set or append
+          // "value": "script-src 'unsafe-inline';"
+
+          // google calendar did not load with these .. WOW
+          // "operation": "append",
+          // "value": "script-src *; script-src-elem *;"
+
+          // same as
+          // "value": "script-src 'unsafe-inline'; script-src-elem 'unsafe-inline';"
+
+          // visibly prevents loading stuff on the page
+          // "operation": "set",
+          // "value": "default-src 'self';"
+        }
+      ]
+    }
+  }
+]

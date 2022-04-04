@@ -1,15 +1,11 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name"            : "Styler",
   "version"         : "1.0",
   "description"     : "Inject styles and scripts into pages",
 
   "background": {
-    "scripts": [
-      "background/file.js",
-      "background/load.js",
-      "background/index.js"
-    ]
+    "service_worker": "background/background.js"
   },
 
   "content_scripts": [
@@ -29,5 +25,21 @@
     "128" : "images/icon128.png"
   },
 
-  "permissions": []
+  "declarative_net_request": {
+    "rule_resources": [{
+      "id": "ruleset_1",
+      "enabled": true,
+      "path": "rules.json"
+    }]
+  },
+
+  "permissions": [
+    "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess",
+    "declarativeNetRequestFeedback",
+    "*://*/*"
+  ],
+  "host_permissions": [
+    "*://*/*"
+  ]
 }
