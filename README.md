@@ -14,20 +14,17 @@ Styler lets you inject `.css` and `.js` files into web sites you visit.
 
 ## Configuration
 
-Option       | Defaults | Description
-:---         | :--:     | :---
-__enable__   | `false`  | Toggle configuration
-__cache__    | `false`  | Toggle caching
-__match__    | `[]`     | List of domains to match
-__ignore__   | `[]`     | List of domains to ignore
-__inject__   | `[]`     | List of files to inject
-__location__ | `''`     | Files location
+Option     | Defaults | Description
+:---       | :--:     | :---
+__enable__ | `false`  | Toggle configuration
+__domain__ | `[]`     | List of domains to match
+__ignore__ | `[]`     | List of domains to ignore
+__inject__ | `[]`     | List of files to inject
+__folder__ | `''`     | Files location
 
-> When `cache` is enabled you have to `Reload` the extension every time you make changes to the `inject`ed files.
+Set `domain` to `['*']` to inject on all domains.
 
-> When `match` is set to `['*']` it is going to match every domain.
-
-> When `location` is ommited it defaults to the `sites` folder.
+When `folder` is ommited it defaults to the `sites` folder.
 
 ## Example
 
@@ -35,8 +32,7 @@ __location__ | `''`     | Files location
 [
   {
     "enable": true,
-    "cache": true,
-    "match": [
+    "domain": [
       "*"
     ],
     "ignore": [
@@ -48,28 +44,26 @@ __location__ | `''`     | Files location
   },
   {
     "enable": true,
-    "cache": false,
-    "match": [
+    "domain": [
       "github.com",
       "gist.github.com"
     ],
+    "folder": "github",
     "inject": [
       "dark-theme.css",
       "fixes.css"
-    ],
-    "location": "github"
+    ]
   },
   {
     "enable": false,
-    "cache": true,
-    "match": [
+    "domain": [
       "youtube.com"
     ],
+    "folder": "youtube",
     "inject": [
       "youtube.css",
       "ads.js"
-    ],
-    "location": "youtube"
+    ]
   }
 ]
 ```
@@ -92,4 +86,4 @@ sites/
 3. Create two separate directories: `sites/github` and `sites/youtube`, and place your styles and scripts there
 4. Repeat step `3.` for each web site you want to style
 
-> Every time you make changes to the configuration data structure you have to `Reload` the extension from `chrome://extensions`
+On every change to the configuration data structure you have to `Reload` the extension from `chrome://extensions`

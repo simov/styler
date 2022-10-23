@@ -1,40 +1,49 @@
 
-var match
+var cache
 
-file()('sites/config.json', (err, config) => {
-  match = JSON.parse(config)
-    .filter(({enable, match, inject}) => enable && match && inject)
-    .reduce((all, item) => {
-      item.match.forEach((domain) => {
-        all[domain] = item
-      })
-      return all
-    }, {})
+var load = (path) => fetch(chrome.runtime.getURL(`${path}?preventCache=${Date.now()}`))
+  .then((res) => res.text())
+
+load('sites/config.json').then((config) => {
+  cache = JSON.parse(config)
+    .filter(({enable, domain, inject}) => enable && domain && inject)
+    .map(({domain, folder, inject}) => ({
+      domain,
+      folder,
+      css: inject.filter((file) => /\.css$/.test(file)),
+      js: inject.filter((file) => /\.js$/.test(file)),
+    }))
+    .flatMap(({domain, ...rest}) => domain.map((domain) => ({domain, ...rest})))
+    .reduce((all, {domain, ...rest}) => (all[domain] = rest, all), {})
 })
 
-var send = (tab, item) => {
-  if (item.cache && item.code) {
-    chrome.tabs.sendMessage(tab.id, {message: 'inject', body: item.code})
+var inject = ({domain, tab}) => {
+  var {css, js, folder} = cache[domain]
+
+  if (css.length) {
+    chrome.scripting.insertCSS({
+      target: {tabId: tab},
+      files: css.map((file) => folder ? `/sites/${folder}/${file}` : `/sites/${file}`)
+    })
   }
-  else {
-    load(item, (code) => {
-      if (item.cache) {
-        item.code = code
-      }
-      chrome.tabs.sendMessage(tab.id, {message: 'inject', body: code})
+
+  if (js.length) {
+    chrome.scripting.executeScript({
+      target: {tabId: tab},
+      files: js.map((file) => folder ? `/sites/${folder}/${file}` : `/sites/${file}`),
     })
   }
 }
 
 chrome.runtime.onMessage.addListener((req, sender, res) => {
   if (req.message === 'check') {
-    if (match['*']) {
-      if (!(match['*'].ignore || []).includes(req.location.host)) {
-        send(sender.tab, match['*'])
+    if (cache['*']) {
+      if (!cache['*']?.ignore.includes(req.location.host)) {
+        inject({domain: '*', tab: sender.tab.id})
       }
     }
-    if (match[req.location.host]) {
-      send(sender.tab, match[req.location.host])
+    if (cache[req.location.host]) {
+      inject({domain: req.location.host, tab: sender.tab.id})
     }
   }
 })
