@@ -1,15 +1,14 @@
 
-# Styler / Chrome Extension
+# Styler / Browser Extension
 
-Styler lets you inject `.css` and `.js` files into web sites you visit.
-
+> _Styler lets you inject `.css` and `.js` files into web sites you visit_
 
 ## Install
 
-1. Pull this repository
+1. Clone this repository
 2. Navigate to `chrome://extensions`
-3. Make sure that the `Developer mode` checkbox in the top right corner is checked
-4. Click on the `Load Unpacked` button and select the folder containing this repository
+3. Make sure that the `Developer mode` switch is enabled
+4. Click on the `Load unpacked` button and select the cloned directory
 
 
 ## Configuration
