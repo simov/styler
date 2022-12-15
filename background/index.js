@@ -35,7 +35,25 @@ var inject = ({domain, tab}) => {
   }
 }
 
-chrome.runtime.onMessage.addListener((req, sender, res) => {
+var debounce = () => new Promise((resolve) => {
+  ;(function debounce () {
+    clearTimeout(timeout)
+    var timeout = setTimeout(() => {
+      if (!cache) {
+        debounce()
+      }
+      else {
+        clearTimeout(timeout)
+        resolve()
+      }
+    }, 50)
+  })()
+})
+
+chrome.runtime.onMessage.addListener(async (req, sender, res) => {
+  if (!cache) {
+    await debounce()
+  }
   if (req.message === 'check') {
     if (cache['*']) {
       if (!cache['*']?.ignore.includes(req.location.host)) {
