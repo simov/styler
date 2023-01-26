@@ -1,8 +1,15 @@
 
 var cache
 
-var load = (path) => fetch(chrome.runtime.getURL(`${path}?preventCache=${Date.now()}`))
-  .then((res) => res.text())
+var wait = (time) => new Promise((resolve) => setTimeout(resolve, time))
+
+var debounce = () => new Promise((resolve) =>
+  wait(50).then(() => !cache ? debounce() : resolve())
+)
+
+var load = (path) =>
+  fetch(chrome.runtime.getURL(`${path}?preventCache=${Date.now()}`))
+    .then((res) => res.text())
 
 load('sites/config.json').then((config) => {
   cache = JSON.parse(config)
@@ -19,49 +26,35 @@ load('sites/config.json').then((config) => {
 
 var inject = ({domain, tab}) => {
   var {css, js, folder} = cache[domain]
-
-  if (css.length) {
-    chrome.scripting.insertCSS({
-      target: {tabId: tab},
-      files: css.map((file) => folder ? `/sites/${folder}/${file}` : `/sites/${file}`)
-    })
-  }
-
-  if (js.length) {
-    chrome.scripting.executeScript({
-      target: {tabId: tab},
-      files: js.map((file) => folder ? `/sites/${folder}/${file}` : `/sites/${file}`),
-    })
-  }
+  return Promise.all([
+    css.length &&
+      chrome.scripting.insertCSS({
+        target: {tabId: tab},
+        files: css.map((file) => folder ? `/sites/${folder}/${file}` : `/sites/${file}`)
+      }),
+    js.length &&
+      chrome.scripting.executeScript({
+        target: {tabId: tab},
+        files: js.map((file) => folder ? `/sites/${folder}/${file}` : `/sites/${file}`)
+      })
+  ].filter(Boolean))
 }
 
-var debounce = () => new Promise((resolve) => {
-  ;(function debounce () {
-    clearTimeout(timeout)
-    var timeout = setTimeout(() => {
-      if (!cache) {
-        debounce()
-      }
-      else {
-        clearTimeout(timeout)
-        resolve()
-      }
-    }, 50)
-  })()
-})
-
-chrome.runtime.onMessage.addListener(async (req, sender, res) => {
-  if (!cache) {
-    await debounce()
-  }
-  if (req.message === 'check') {
-    if (cache['*']) {
-      if (!cache['*']?.ignore.includes(req.location.host)) {
-        inject({domain: '*', tab: sender.tab.id})
-      }
+chrome.tabs.onUpdated.addListener(async (id, info, tab) => {
+  if (info.status === 'loading') {
+    if (!cache) {
+      await debounce()
     }
-    if (cache[req.location.host]) {
-      inject({domain: req.location.host, tab: sender.tab.id})
+    if (/https?:\/\/(.*?)\//.test(tab.url)) {
+      var [,host] = /https?:\/\/(.*?)\//.exec(tab.url)
+      if (cache['*']) {
+        if (!cache['*']?.ignore.includes(host)) {
+          await inject({domain: '*', tab: id})
+        }
+      }
+      if (cache[host]) {
+        await inject({domain: host, tab: id})
+      }
     }
   }
 })
